@@ -268,3 +268,21 @@ nav .navbar a {
         width: 70%;
     }
 }
+.btn1 {
+    width: 150px;
+    background-color: #5995fd;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 41vh 95vh;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn1:hover {
+    background-color: #4d84e2;
+}

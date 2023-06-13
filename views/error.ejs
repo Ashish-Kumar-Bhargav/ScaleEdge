@@ -141,4 +141,10 @@
             alert("Password do not match.");
         }
     });
+    document.getElementById("mobile").addEventListener("input", function () {
+    const maxLength = 10;
+    if (this.value.length > maxLength) {
+        this.value = this.value.slice(0, maxLength);
+    }
+});
 </script>

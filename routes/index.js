@@ -88,11 +88,6 @@ router.post('/auth_login', function (req, res, next) {
 
 
 
-
-
-
-
-
 //Route For Home Page
 router.get('/home', function (req, res, next) {
   res.render('home', { message: 'Welcome, ' + req.session.email });
@@ -105,11 +100,5 @@ router.get('/logout', function (req, res, next) {
   }
 })
 
-
-
-// router.post('/user',function(req, res, next)
-// {
-//   res.redirect('E:\\login\\views\\error.ejs')
-// })
 
 module.exports = router;
