@@ -88,9 +88,17 @@ router.post('/auth_login', function (req, res, next) {
 
 
 
-//Route For Home Page
 router.get('/home', function (req, res, next) {
-  res.render('home', { message: 'Welcome, ' + req.session.email });
+  // res.render('home', { message: 'Welcome, ' + req.session.email });
+  con.query('SELECT * FROM user_master', (err, rows) => {
+    if (!err) {
+      let removedUser = req.query.removed;
+      res.render('home', { rows, removedUser });
+    } else {
+      console.log(err);
+    }
+    console.log('The data from user table: \n', rows);
+  });
 });
 
 router.get('/logout', function (req, res, next) {
@@ -100,5 +108,14 @@ router.get('/logout', function (req, res, next) {
   }
 })
 
+
+
+router.get('/add', function (req, res, next) {
+  res.render('adduser', { message: 'Welcome, ' + req.session.email });
+});
+
+router.get('/edit', function (req, res, next) {
+  res.render('edit', { message: 'Welcome, ' + req.session.email });
+});
 
 module.exports = router;

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Responsiive Admin Dashboard </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/stylesheets/style2.css" />
+</head>
+
+<body style="background-color: #fafbfe;">
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="fa-solid fa-s fa-spin"></i>
+            <span class="logo_name">ScaleEdge</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="active">
+                    <i class='bx bx-grid-alt' style="padding-right: 40px;"></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-house" style="padding-right: 40px;"></i>
+                    <span class="links_name">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-user" style="padding-right: 40px;"></i>
+                    <span class="links_name">User Manegement</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-pencil" style="padding-right: 40px;"></i>
+                    <span class="links_name">Lead Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-gear" style="padding-right: 40px;"></i>
+                    <span class="links_name">Setting</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-right-from-bracket" style="padding-right: 40px;"></i>
+                    <span class="links_name">Log Out</span>
+                </a>
+            </li>
+            <li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+                <i class='bx bx-search'></i>
+            </div>
+            <div class="profile-details">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+
+
+        </nav>
+
+        <div class="title">
+            <i class="fa-solid fa-user title-1"></i>
+           <span class="text">User</span>
+         
+       </div>
+            <div class="section" style="padding:25px; background-color: #fafbfe;">
+                <div class="container">
+                    <div class="page-title">
+                        <h4>Product Edit Sub Category</h4>
+                        <h6>Create new product Category</h6>
+                    </div>
+                   <div class="add-card" style="background-color: white; border: 1px solid #e8ebed; padding:25px">
+                    <div class="card-content">
+                        <div class="row" id="category-form">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Parent Category</label>
+                                    <select class="select select2-hidden-accessible" id="parent-category-select" data-select2-id="1" tabindex="-1" aria-hidden="true" required>
+                                        <option data-select2-id="3">Choose Category</option>
+                                        <option data-select2-id="12">Category</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Parent Category</label>
+                                    <input type="text"  id="parent-category-input">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Parent Category</label>
+                                   <input type="text" name="" id="category-name-input" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Description</label>
+                                    <textarea name="" id="" cols="30" rows="10" style="width:95%; height: 130px; padding: 15px;">Computer Description</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                           <a href="#" id="submit-btn" class=" btn btn-submit">Submit</a>
+                           <a href="#" class=" btn btn-cancel">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </div>
+            </div>
+
+        </div>
+       
+    </section>
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        const body = document.querySelector("body"),
+            modeToggle = body.querySelector(".mode-toggle");
+        sidebarBtn.onclick = function () {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+
+    document.getElementById("submit-btn").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Get form values
+        var parentCategorySelect = document.getElementById("parent-category-select");
+        var parentCategoryInput = document.getElementById("parent-category-input");
+        var categoryNameInput = document.getElementById("category-name-input");
+
+        // Validate parent category select
+        if (parentCategorySelect.value === "Choose Category") {
+            alert("Please select a parent category");
+            return;
+        }
+
+        // Validate parent category input
+        if (parentCategoryInput.value === "") {
+            alert("Please enter a parent category");
+            return;
+        }
+
+        // Validate category name input
+        if (categoryNameInput.value === "") {
+            alert("Please enter a category name");
+            return;
+        }
+
+        // If all validations pass, submit the form
+        document.getElementById("category-form").submit();
+    });
+</script>
+
+
+</body>
+
+</html>
+<style>
+
+    .page-title{
+        margin:10px 0px;
+    }
+
+    .form-group label{
+        display:block;
+        padding-bottom: 12px;
+        padding-top: 10px;
+    }
+
+    .form-group select{
+        width:95%;
+        padding:10px;
+        border-radius: 10px;
+    }
+
+    .form-group input{
+        width:95%;
+        padding:10px;
+        border-radius: 10px;
+    }
+    .form-group input[type=text], .form-group input[type=password] {
+    border: 1px solid rgba(145,158,171,.32);
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #637381;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+    .form-group input[type=text]:focus {
+    border-color: #ff9f43;
+    background: #fff;
+}
+    .btn{
+       color:white;
+       width:120px;
+       padding:14px 10px;
+       font-weight: 600;
+       margin-top:10px;
+       margin-right: 10px;
+    }
+
+    .btn-submit{
+        background-color: orange;
+    }
+
+    .btn-cancel{
+        background-color:#637381;
+    }
+ 
+ .btn-submit:hover{
+    background-color:rgb(234,108,12) ;
+    color:white;
+ }
+
+ .btn-cancel:hover{
+    background-color: black;
+    color:white;
+ }
+</style>
+

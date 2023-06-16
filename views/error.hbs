@@ -1,0 +1,141 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .alert.success {
+      background-color: #4caf50;
+      color: #fff;
+    }
+  </style>
+
+  <title>Scaleegde</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form action="/auth_reg" method="post" class="sign-in-form" id="companyForm" onsubmit="return validateForm()">
+          <h2 class="title">Register</h2>
+          <div class="input-field">
+            <i class="fa fa-briefcase"></i>
+            <input type="text" id="company_name" name="company_name" placeholder="Company Name" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-user-alt"></i>
+            <input type="text" id="name" name="name" placeholder="User Name" />
+          </div>
+          <div class="input-field">
+            <i class="fa fa-address-card-o"></i>
+            <input type="text" id="address" name="address" placeholder="Address" />
+          </div>
+
+          <div class="input-field">
+            <i class="fa fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="E-mail" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-mobile-alt"></i>
+            <input type="number" id="mobile" name="mobile" placeholder="Mobile" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Password" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" />
+          </div>
+          <button type="submit" class="btn">Register</button>
+        </form>
+      </div>
+    </div>
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>New here?</h3>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!</p>
+        </div>
+        <img src="images/register.svg" class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>One of us?</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.</p>
+        </div>
+        <img src="images/register.svg" class="image" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function validateForm() {
+      var companyName = document.getElementById('company_name').value;
+      var userName = document.getElementById('name').value;
+      var address = document.getElementById('address').value;
+      var email = document.getElementById('email').value;
+      var mobile = document.getElementById('mobile').value;
+      var password = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('cpassword').value;
+
+      if (
+        companyName === '' ||
+        userName === '' ||
+        address === '' ||
+        email === '' ||
+        mobile === '' ||
+        password === '' ||
+        confirmPassword === ''
+      ) {
+        showAlert('Please fill in all fields.');
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        showAlert('Passwords do not match.');
+        return false;
+      }
+
+      if (mobile.length !== 10 || isNaN(mobile)) {
+        showAlert('Mobile number should have exactly 10 digits.');
+        return false;
+      }
+
+      showSuccessAlert('Registration successful. Welcome, ' + userName + '!');
+
+      setTimeout(function () {
+        window.location.href = '/';
+      }, 5000);
+
+      return false;
+    }
+
+    function showAlert(message) {
+      Swal.fire({
+        title: 'Error',
+        text: message,
+        icon: 'error',
+      });
+    }
+
+    function showSuccessAlert(message) {
+      Swal.fire({
+        title: 'Success',
+        text: message,
+        icon: 'success',
+        timer: 5000,
+        timerProgressBar: true,
+      }).then(function () {
+        window.location.href = '/';
+      });
+    }
+  </script>
+</body>
+
+</html>
