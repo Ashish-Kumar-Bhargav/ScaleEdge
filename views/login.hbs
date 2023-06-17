@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Scaleegde</title>
 </head>
@@ -14,7 +14,7 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form method="post" action="/auth_login" class="sign-in-form" onsubmit="return validateForm()">
+                <form method="post" action="/auth_login" class="sign-in-form">
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
@@ -52,7 +52,7 @@
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
                         ex ratione. Aliquid!
                     </p>
-                    <a href="/register">
+                    <a href="/auth_reg">
                         <button class="btn transparent" id="sign-up-btn">
                             Sign up
                         </button>
@@ -77,49 +77,43 @@
     </div>
 
     <script>
-        function validateForm() {
-            var emailInput = document.getElementById("email").value;
-            var passwordInput = document.getElementById("password").value;
+        const loginForm = document.querySelector('.sign-in-form');
 
-            if (emailInput === "") {
-                showAlert("Please enter the username.", "error");
-                return false;
-            }
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-            if (passwordInput === "") {
-                showAlert("Please enter the password.", "error");
-                return false;
-            }
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-            // Replace 'username' with the actual username value from your server-side code
-            var email = "";
-            showSuccessAlert("Login successful", "Welcome, " + email + "");
-
-            setTimeout(function () {
-                // Replace 'nextpage.html' with the actual URL of the next page
-                window.location.href = "/home";
-            }, 5000);
-
-            return false;
-        }
-
-        function showAlert(message, type) {
-            Swal.fire({
-                title: "Error!",
-                text: message,
-                icon: type,
-                confirmButtonText: "OK",
-            });
-        }
-
-        function showSuccessAlert(title, message) {
-            Swal.fire({
-                title: title,
-                text: message,
-                icon: "success",
-                confirmButtonText: "OK",
-            });
-        }
+            fetch('/auth_login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Login Successful',
+                            text: 'Welcome to the dashboard!',
+                        }).then(() => {
+                            window.location.href = '/auth_login';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Failed',
+                            text: data.message,
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
     </script>
 </body>
 
