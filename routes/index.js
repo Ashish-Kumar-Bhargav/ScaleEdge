@@ -86,8 +86,8 @@ router.get('/edit', function (req, res, next) {
   res.render('edit', { message: 'Welcome, ' + req.session.email });
 });
 
-router.get('/register', function (req, res, next) {
-  res.render('error', { message: 'Welcome, ' + req.session.email });
-});
+// router.get('/register', function (req, res, next) {
+//   res.render('error', { message: 'Welcome, ' + req.session.email });
+// });
 
 module.exports = router;

@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title> Responsiive Admin Dashboard </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/stylesheets/page.css" />
+    <link rel="stylesheet" href="/stylesheets/page.css" />
 </head>
 
-<body style="background-color: #fafbfe;">
+<body>
     <div class="sidebar">
         <div class="logo-details">
             <i class="fa-solid fa-s fa-spin"></i>
@@ -24,38 +27,38 @@
         <ul class="nav-links">
             <li>
                 <a href="#" class="active">
-                    <i class='bx bx-grid-alt' style="padding-right: 40px;"></i>
+                    <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa-solid fa-house" style="padding-right: 40px;"></i>
+                    <i class="fa-solid fa-house"></i>
                     <span class="links_name">Home</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa-solid fa-user" style="padding-right: 40px;"></i>
+                    <i class="fa-solid fa-user"></i>
                     <span class="links_name">User Manegement</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa-solid fa-pencil" style="padding-right: 40px;"></i>
+                    <i class="fa-solid fa-pencil"></i>
                     <span class="links_name">Lead Management</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa-solid fa-gear" style="padding-right: 40px;"></i>
+                    <i class="fa-solid fa-gear"></i>
                     <span class="links_name">Setting</span>
                 </a>
             </li>
 
             <li>
                 <a href="#">
-                    <i class="fa-solid fa-right-from-bracket" style="padding-right: 40px;"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="links_name">Log Out</span>
                 </a>
             </li>
@@ -82,57 +85,58 @@
 
         <div class="title">
             <i class="fa-solid fa-user title-1"></i>
-           <span class="text">User</span>
-         
-       </div>
-            <div class="section" style="padding:25px; background-color: #fafbfe;">
-                <div class="container">
-                    <div class="page-title">
-                        <h4>Product Add Sub Category</h4>
-                        <h6>Create new product Category</h6>
-                    </div>
-                   <div class="add-card" style="background-color: white; border: 1px solid #e8ebed; padding:25px">
+            <span class="text">User</span>
+
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="page-title">
+                    <h4>Product Add Sub Category</h4>
+                    <h6>Create new product Category</h6>
+                </div>
+                <div class="add-card">
                     <div class="card-content">
                         <div class="row" id="category-form">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Parent Category</label>
-                                    <select class="select select2-hidden-accessible" id="parent-category-select" data-select2-id="1" tabindex="-1" aria-hidden="true" required>
+                                    <select class="select select2-hidden-accessible" id="parent-category-select"
+                                        data-select2-id="1" tabindex="-1" aria-hidden="true" required>
                                         <option data-select2-id="3">Choose Category</option>
                                         <option data-select2-id="12">Category</option>
-                                        </select>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Parent Category</label>
-                                    <input type="text"  id="parent-category-input">
+                                    <input type="text" id="parent-category-input">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Parent Category</label>
-                                   <input type="text" name="" id="category-name-input" required>
+                                    <input type="text" name="" id="category-name-input" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Description</label>
-                                    <textarea name="" id="" cols="30" rows="10" style="width:95%; height: 130px; padding: 15px;">Computer Description</textarea>
+                                    <textarea name="" id="" cols="30" rows="10">Computer Description</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                           <a href="#" id="submit-btn" class=" btn btn-submit">Submit</a>
-                           <a href="#" class=" btn btn-cancel">Cancel</a>
+                                <a href="#" id="submit-btn" class=" btn btn-submit">Submit</a>
+                                <a href="#" class=" btn btn-cancel">Cancel</a>
                             </div>
                         </div>
                     </div>
-                   </div>
                 </div>
             </div>
+        </div>
 
         </div>
-       
+
     </section>
 
     <script>
@@ -148,39 +152,38 @@
                 sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
         }
 
-    document.getElementById("submit-btn").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent form submission
-        
-        // Get form values
-        var parentCategorySelect = document.getElementById("parent-category-select");
-        var parentCategoryInput = document.getElementById("parent-category-input");
-        var categoryNameInput = document.getElementById("category-name-input");
+        document.getElementById("submit-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent form submission
 
-        // Validate parent category select
-        if (parentCategorySelect.value === "Choose Category") {
-            alert("Please select a parent category");
-            return;
-        }
+            // Get form values
+            var parentCategorySelect = document.getElementById("parent-category-select");
+            var parentCategoryInput = document.getElementById("parent-category-input");
+            var categoryNameInput = document.getElementById("category-name-input");
 
-        // Validate parent category input
-        if (parentCategoryInput.value === "") {
-            alert("Please enter a parent category");
-            return;
-        }
+            // Validate parent category select
+            if (parentCategorySelect.value === "Choose Category") {
+                alert("Please select a parent category");
+                return;
+            }
 
-        // Validate category name input
-        if (categoryNameInput.value === "") {
-            alert("Please enter a category name");
-            return;
-        }
+            // Validate parent category input
+            if (parentCategoryInput.value === "") {
+                alert("Please enter a parent category");
+                return;
+            }
 
-        // If all validations pass, submit the form
-        document.getElementById("category-form").submit();
-    });
-</script>
+            // Validate category name input
+            if (categoryNameInput.value === "") {
+                alert("Please enter a category name");
+                return;
+            }
+
+            // If all validations pass, submit the form
+            document.getElementById("category-form").submit();
+        });
+    </script>
 
 
 </body>
 
 </html>
-

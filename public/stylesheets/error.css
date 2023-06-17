@@ -1,0 +1,4 @@
+.image{
+    width: -webkit-fill-available; 
+    overflow:hidden;
+}
