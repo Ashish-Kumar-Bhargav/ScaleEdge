@@ -9,13 +9,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/page.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -94,44 +95,53 @@
                     <h4>Product Add Sub Category</h4>
                     <h6>Create new product Category</h6>
                 </div>
-                <div class="add-card">
+                <form class="add-card" action="/add" method="post" enctype="multipart/form-data" id="formData">
                     <div class="card-content">
                         <div class="row" id="category-form">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Parent Category</label>
-                                    <select class="select select2-hidden-accessible" id="parent-category-select"
-                                        data-select2-id="1" tabindex="-1" aria-hidden="true" required>
-                                        <option data-select2-id="3">Choose Category</option>
-                                        <option data-select2-id="12">Category</option>
-                                    </select>
+                                    <label for="">Name</label>
+                                    <input type="text" id="user_name" name="user_name">
+
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Parent Category</label>
-                                    <input type="text" id="parent-category-input">
+                                    <label for="">E-mail</label>
+                                    <input type="text" id="email" name="email">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Parent Category</label>
-                                    <input type="text" name="" id="category-name-input" required>
+                                    <label for="">Mobile</label>
+                                    <input type="text" id="mobile" name="mobile">
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-4 my-3">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Choose Image</label>
+                                    <input class="form-control" type="file" name="Imagepath" id="Imagepath">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Description</label>
-                                    <textarea name="" id="" cols="30" rows="10">Computer Description</textarea>
+                                    <label for="">Password</label>
+                                    <input type="text" id="password" name="password">
                                 </div>
                             </div>
+                            {{!-- <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Confirm Password</label>
+                                    <input type="text">
+                                </div>
+                            </div> --}}
                             <div class="col-md-12">
                                 <a href="#" id="submit-btn" class=" btn btn-submit">Submit</a>
                                 <a href="#" class=" btn btn-cancel">Cancel</a>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -156,31 +166,94 @@
             event.preventDefault(); // Prevent form submission
 
             // Get form values
-            var parentCategorySelect = document.getElementById("parent-category-select");
-            var parentCategoryInput = document.getElementById("parent-category-input");
-            var categoryNameInput = document.getElementById("category-name-input");
+            var nameInput = document.getElementById("user_name");
+            var emailInput = document.getElementById("email");
+            var mobileInput = document.getElementById("mobile");
+            var passwordInput = document.getElementById("password");
+            var profileImageInput = document.getElementById("Imagepath");
 
-            // Validate parent category select
-            if (parentCategorySelect.value === "Choose Category") {
-                alert("Please select a parent category");
+            // Validate form inputs
+            if (nameInput.value === "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter a name',
+                });
                 return;
             }
 
-            // Validate parent category input
-            if (parentCategoryInput.value === "") {
-                alert("Please enter a parent category");
+            if (emailInput.value === "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter an email',
+                });
                 return;
             }
 
-            // Validate category name input
-            if (categoryNameInput.value === "") {
-                alert("Please enter a category name");
+            if (mobileInput.value === "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter a mobile number',
+                });
+                return;
+            }
+            if (passwordInput.value === "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter a Password',
+                });
                 return;
             }
 
-            // If all validations pass, submit the form
-            document.getElementById("category-form").submit();
+            if (!profileImageInput.files || profileImageInput.files.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please choose an image',
+                });
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append("user_name", nameInput.value);
+            formData.append("email", emailInput.value);
+            formData.append("mobile", mobileInput.value);
+            formData.append("password", passwordInput.value);
+            formData.append("Imagepath", profileImageInput.files[0]);
+
+            fetch("/add", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'User added successfully',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "/dashboard";
+                            }
+                        });
+                    } else {
+                        throw new Error("Failed to add user");
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to add user',
+                    });
+                });
         });
+
+
     </script>
 
 
