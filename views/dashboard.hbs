@@ -46,6 +46,12 @@
                 </a>
             </li>
             <li>
+                <a href="/face">
+                    <i class="fa-solid fa-clipboard-user"></i>
+                    <span class="links_name">Attendance</span>
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <i class="fa-solid fa-gear"></i>
                     <span class="links_name">Setting</span>
@@ -115,13 +121,13 @@
                                     <td>{{this.mobile}}</td>
                                     <td>{{this.user_group}}</td>
                                     <td class="text-end">
-                                        <a href="/edit" type="button" class="btn btn-light btn-small"
+                                        <a href="/edit/{{this.id}}" type="button" class="btn btn-light btn-small"
                                             style="text-decoration: none; color:black;">
-                                            <i class="fa-sharp fa-solid fa-pencil"></i>
+                                            <i class="fa-solid fa-pencil"></i>
                                         </a>
                                         <a href="#" onclick="deleteUser('{{this.id}}')" type="button"
                                             class="btn btn-light btn-small">
-                                            <i class="fa-solid fa-trash red"></i>
+                                            <i class="fa-solid fa-trash-alt red"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -129,6 +135,9 @@
                             </tbody>
                         </table>
                     </div>
+
+
+
                     <div class="line">
                         <p>Show per page</p>
                         <select class="same">

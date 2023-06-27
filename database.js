@@ -5,7 +5,7 @@ var con = mysql.createConnection({
     host : 'localhost',
     user : 'root',
     password : 'system',
-    database : 'company1'
+    database : 'scaleedge'
 });
 
 con.connect((err) => {
