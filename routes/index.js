@@ -68,18 +68,37 @@ router.post("/auth_reg", function (req, res, next) {
 
 
 //dashboard
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", function (req, res, next) {
+  res.render("dashboard", { message: "Welcome, " + req.session.email });
+});
+
+//details
+router.get("/details/:user_name", function (req, res, next) {
+  const user_name = req.params.user_name;
+  con.query("CALL user_in_out(?)", [user_name], (err, rows) => {
+    if (!err) {
+      res.render("details", { rows: rows[0], message: "Welcome, " + req.session.email });
+    } else {
+      console.log(err);
+    }
+    console.log("The data from attendance table: \n", rows[0]);
+  });
+});
+
+
+
+//usermanagment
+router.get("/usermangment", (req, res) => {
   con.query("CALL user_master_fetchdata()", (err, rows) => {
     if (!err) {
       let removedUser = req.query.removed;
-      res.render("dashboard", { rows: rows[0], removedUser });
+      res.render("usermangment", { rows: rows[0], removedUser });
     } else {
       console.log(err);
     }
     console.log("The data from user table: \n", rows[0]);
   });
 });
-
 
 //logout
 router.get("/logout", function (req, res, next) {
@@ -101,7 +120,7 @@ router.post("/add", function (req, res, next) {
   var mobile = req.body.mobile;
   var password = req.body.password;
   var profileImage = req.files.Imagepath;
-  var imageName = profileImage.name; 
+  var imageName = profileImage.name;
 
   var insertSql = "CALL user_master_userformdata (?,?,?,?,?)";
 
@@ -140,7 +159,7 @@ router.get("/edit/:id", function (req, res, next) {
     if (result.length > 0) {
       res.render("edit", {
         title: "scaleedge",
-        user: result[0], 
+        user: result[0],
       });
     } else {
       res.redirect("/dashboard");
@@ -190,15 +209,25 @@ router.get("/delete/:id", function (req, res, next) {
   });
 });
 
+//report
+router.get("/report", function (req, res, next) {
+  var sql = "SELECT user_name, user_email, DATE_FORMAT(date_column, '%Y-%m-%d') AS date_column, time_column, A_type, range_status, attendance_mark FROM attendance";
+  con.query(sql, function(error, results) {
+    if (error) throw error;
+    res.render("report", { title: "Report", rows: results });
+  });
+});
 
+
+ 
 //faceRecognition
 router.get("/face", function (req, res, next) {
   res.render("face", { title: "sumit" });
 });
 
 router.post("/getimg", function (req, res, next) {
-  var insertSql = "SELECT id, user_id, Imagepath FROM user_master;";
-  con.query(insertSql, [], function (err, result, fields) {
+  var selectSql = "SELECT id, user_id, Imagepath FROM user_master;";
+  con.query(selectSql, [], function (err, result, fields) {
     if (err) throw err;
     res.json(result);
   });
@@ -208,10 +237,10 @@ router.post("/storeFaceMatchResult", function (req, res, next) {
   var label = req.body.label;
   var distance = req.body.distance;
   var updateType = req.body.update_type;
-  var user_id = label; 
+  var user_id = label;
 
-  var insertSql = "CALL Attendance(?, ?, ?, ?)";
-  con.query(insertSql, [user_id, updateType, distance, null], function (err, result) {
+  var insertSql = "CALL Attendance(?, ?, ?, ?, ?, ?, ?)";
+  con.query(insertSql, [user_id, updateType, distance, null, null, null, null], function (err, result) {
     if (err) {
       console.error("An error occurred while storing face match result:", err);
       res.status(500).json({ success: false, error: err });
@@ -227,18 +256,21 @@ router.post("/storeCheckoutTime", function (req, res, next) {
   var updateType = "out";
   var latitude = req.body.latitude;
   var longitude = req.body.longitude;
+  var range_status = req.body.range_status;
 
-  var selectSql = "SELECT id FROM user_master WHERE user_id = ?";
+  var selectSql = "SELECT id, email, user_name FROM user_master WHERE user_id = ?";
   con.query(selectSql, [label], function (err, result) {
     if (err) {
-      console.error("An error occurred while retrieving user ID:", err);
+      console.error("An error occurred while retrieving user details:", err);
       res.status(500).json({ success: false, error: err });
     } else {
       if (result.length > 0) {
         var user_id = result[0].id;
+        var email = result[0].email;
+        var username = result[0].user_name;
 
-        var insertSql = "CALL Attendance(?, ?, ?, ?)";
-        con.query(insertSql, [user_id, updateType, latitude, longitude], function (err, result) {
+        var insertSql = "CALL Attendance(?, ?, ?, ?, ?, ?, ?)";
+        con.query(insertSql, [user_id, updateType, latitude, longitude, range_status, email, username], function (err, result) {
           if (err) {
             console.error("An error occurred while storing checkout time:", err);
             res.status(500).json({ success: false, error: err });
@@ -260,18 +292,21 @@ router.post("/storeCheckinTime", function (req, res, next) {
   var updateType = "in";
   var latitude = req.body.latitude;
   var longitude = req.body.longitude;
+  var range_status = req.body.range_status;
 
-  var selectSql = "SELECT id FROM user_master WHERE user_id = ?";
+  var selectSql = "SELECT id, email, user_name FROM user_master WHERE user_id = ?";
   con.query(selectSql, [label], function (err, result) {
     if (err) {
-      console.error("An error occurred while retrieving user ID:", err);
+      console.error("An error occurred while retrieving user details:", err);
       res.status(500).json({ success: false, error: err });
     } else {
       if (result.length > 0) {
         var user_id = result[0].id;
+        var email = result[0].email;
+        var username = result[0].user_name;
 
-        var insertSql = "CALL Attendance(?, ?, ?, ?)";
-        con.query(insertSql, [user_id, updateType, latitude, longitude], function (err, result) {
+        var insertSql = "CALL Attendance(?, ?, ?, ?, ?, ?, ?)";
+        con.query(insertSql, [user_id, updateType, latitude, longitude, range_status, email, username], function (err, result) {
           if (err) {
             console.error("An error occurred while storing check-in time:", err);
             res.status(500).json({ success: false, error: err });
@@ -288,7 +323,6 @@ router.post("/storeCheckinTime", function (req, res, next) {
   });
 });
 
-
 function getUserIDFromLabel(label) {
   var selectSql = "SELECT id FROM user_master WHERE user_id = ?";
   var result = con.query(selectSql, [label]);
@@ -299,4 +333,6 @@ function getUserIDFromLabel(label) {
   }
 }
 
+
 module.exports = router;
+

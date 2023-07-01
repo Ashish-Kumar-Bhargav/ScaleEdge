@@ -1,278 +1,141 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Admin Dashboard</title>
+    <link rel="stylesheet" href="stylesheets/usermanagment.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/stylesheets/dashboard.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
 </head>
 
 <body>
-    <div class="sidebar">
-        <div class="logo-details">
-            <i class="fa-solid fa-s fa-spin"></i>
-            <span class="logo_name">ScaleEdge</span>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-s fa-spin"></i>
+                        </span>
+                        <span class="title">ScaleEdge</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-house"></i>
+                        </span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/usermangment">
+                        <span class="icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <span class="title">User Managment</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-pencil"></i>
+                        </span>
+                        <span class="title">Lead Managment</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/face">
+                        <span class="icon">
+                            <i class="fa-solid fa-clipboard-user"></i>
+                        </span>
+                        <span class="title">Attendance</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/report">
+                        <span class="icon">
+                            <i class="fa-solid fa-clipboard-user"></i>
+                        </span>
+                        <span class="title">Report</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </span>
+                        <span class="title">Setting</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/">
+                        <span class="icon">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <ul class="nav-links">
-            <li>
-                <a href="#" class="active">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="links_name">Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-user"></i>
-                    <span class="links_name">User Management</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-pencil"></i>
-                    <span class="links_name">Lead Management</span>
-                </a>
-            </li>
-            <li>
-                <a href="/face">
-                    <i class="fa-solid fa-clipboard-user"></i>
-                    <span class="links_name">Attendance</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-gear"></i>
-                    <span class="links_name">Setting</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span class="links_name">Log Out</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <section class="home-section">
-        <nav>
-            <div class="sidebar-button">
-                <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Dashboard</span>
-            </div>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search...">
-                <i class='bx bx-search'></i>
-            </div>
-            <div class="profile-details">
-                <i class="fa-solid fa-bell"></i>
-            </div>
-        </nav>
 
-        <div class="home-content">
-            <div class="title">
-                <span class="text">Product Sub Category list <p>View/Search product Category</p></span>
-                <a href="/add/{{this.id}}">
-                    <span class="Add-btn"><i class="fa-sharp fa-solid fa-plus"></i>Add User</span>
-                </a>
-            </div>
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
 
-            <div class="sales-boxes">
-                <div class="recent-sales box">
-                    <div class="search">
-                        <a href="" class="colon-2"><img
-                                src="https://dreamspos.dreamguystech.com/html/template/assets/img/icons/filter.svg"
-                                alt="" srcset=""></a>
-                        <i class='bx bx-search bx-1'></i>
-                        <input type="text" id="searchInput1" placeholder="Search...">
-                    </div>
+                <div class="search-box">
+                    <label>
+                        <input type="text" id="searchInput" placeholder="Search...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </label>
+                </div>
 
-                    <div class="sales-details">
-                        <table id="userDataTable" class="table table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th><input type="checkbox" id="selectAll"></th>
-                                    <th scope="col">Id<i class="fa-solid fa-sort sort"></i></th>
-                                    <th scope="col">Name<i class="fa-solid fa-sort sort"></i></th>
-                                    <th scope="col">Email<i class="fa-solid fa-sort sort"></i></th>
-                                    <th scope="col">Phone<i class="fa-solid fa-sort sort"></i></th>
-                                    <th scope="col">Group<i class="fa-solid fa-sort sort"></i></th>
-                                    <th scope="col" class="text-end">Action <i class="fa-solid fa-sort sort"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each rows}}
-                                <tr>
-                                    <td><input type="checkbox" class="checkbox"></td>
-                                    <td scope="row">{{this.id}}</td>
-                                    <td>{{this.user_id}}</td>
-                                    <td>{{this.email}}</td>
-                                    <td>{{this.mobile}}</td>
-                                    <td>{{this.user_group}}</td>
-                                    <td class="text-end">
-                                        <a href="/edit/{{this.id}}" type="button" class="btn btn-light btn-small"
-                                            style="text-decoration: none; color:black;">
-                                            <i class="fa-solid fa-pencil"></i>
-                                        </a>
-                                        <a href="#" onclick="deleteUser('{{this.id}}')" type="button"
-                                            class="btn btn-light btn-small">
-                                            <i class="fa-solid fa-trash-alt red"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                {{/each}}
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
-                    <div class="line">
-                        <p>Show per page</p>
-                        <select class="same">
-                            <option value="Admin">10</option>
-                            <option value="User">25</option>
-                            <option value="User">50</option>
-                            <option value="User">100</option>
-                        </select>
-                        <div class="button">
-                            <p>1 - 10 of 17 items</p>
-                            <a href="#" class="colon-1">1</a>
-                            <a href="" class="colon">2</a>
-                        </div>
-                    </div>
+                <div class="user">
                 </div>
             </div>
+
         </div>
-        <div class="spin">
-            <i class="fa-solid fa-gear fa-spin mdi-spin"></i>
-        </div>
-    </section>
+    </div>
+
+    <script>
+        let list = document.querySelectorAll(".navigation li");
+
+        function activeLink() {
+            list.forEach((item) => {
+                item.classList.remove("hovered");
+            });
+            this.classList.add("hovered");
+        }
+
+        list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+        // Menu Toggle
+        let toggle = document.querySelector(".toggle");
+        let navigation = document.querySelector(".navigation");
+        let main = document.querySelector(".main");
+
+        toggle.onclick = function () {
+            navigation.classList.toggle("active");
+            main.classList.toggle("active");
+        };
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
-
-<script>
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".sidebarBtn");
-    const body = document.querySelector("body"),
-        modeToggle = body.querySelector(".mode-toggle");
-    sidebarBtn.onclick = function () {
-        sidebar.classList.toggle("active");
-        if (sidebar.classList.contains("active")) {
-            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-        } else
-            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-    }
-
-    const selectAll = document.getElementById('selectAll');
-    const checkboxes = document.querySelectorAll('.checkbox');
-
-    selectAll.addEventListener('change', function () {
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = selectAll.checked;
-        });
-    });
-
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            if (!this.checked) {
-                selectAll.checked = false;
-            } else {
-                let allChecked = true;
-                checkboxes.forEach(check => {
-                    if (!check.checked) {
-                        allChecked = false;
-                    }
-                });
-                if (allChecked) {
-                    selectAll.checked = true;
-                }
-            }
-        });
-    });
-
-    function deleteUser(userId) {
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this user!",
-            icon: "warning",
-            buttons: ["Cancel", "Delete"],
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
-                window.location.href = "/delete/" + userId;
-            }
-        });
-    }
-
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', function () {
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        const rows = document.querySelectorAll('#userDataTable tbody tr');
-        rows.forEach(row => {
-            const nameCell = row.querySelector('td:nth-child(3)');
-            const emailCell = row.querySelector('td:nth-child(4)');
-            const mobileCell = row.querySelector('td:nth-child(5)');
-            const userGroupCell = row.querySelector('td:nth-child(6)');
-
-            const name = nameCell.textContent.trim().toLowerCase();
-            const email = emailCell.textContent.trim().toLowerCase();
-            const mobile = mobileCell.textContent.trim().toLowerCase();
-            const userGroup = userGroupCell.textContent.trim().toLowerCase();
-
-            if (
-                name.includes(searchTerm) ||
-                email.includes(searchTerm) ||
-                mobile.includes(searchTerm) ||
-                userGroup.includes(searchTerm)
-            ) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    });
-
-
-
-    const searchInput1 = document.getElementById('searchInput1');
-    searchInput1.addEventListener('input', function () {
-        const searchTerm = searchInput1.value.trim().toLowerCase();
-        const rows = document.querySelectorAll('#userDataTable tbody tr');
-        rows.forEach(row => {
-            const nameCell = row.querySelector('td:nth-child(3)');
-            const emailCell = row.querySelector('td:nth-child(4)');
-            const mobileCell = row.querySelector('td:nth-child(5)');
-            const userGroupCell = row.querySelector('td:nth-child(6)');
-
-            const name = nameCell.textContent.trim().toLowerCase();
-            const email = emailCell.textContent.trim().toLowerCase();
-            const mobile = mobileCell.textContent.trim().toLowerCase();
-            const userGroup = userGroupCell.textContent.trim().toLowerCase();
-
-            if (
-                name.includes(searchTerm) ||
-                email.includes(searchTerm) ||
-                mobile.includes(searchTerm) ||
-                userGroup.includes(searchTerm)
-            ) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    });
-
-</script>

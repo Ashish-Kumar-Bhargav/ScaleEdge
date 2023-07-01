@@ -1,0 +1,187 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Admin Dashboard</title>
+  <link rel="stylesheet" href="/stylesheets/details.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="#">
+            <span class="icon">
+              <i class="fa-solid fa-s fa-spin"></i>
+            </span>
+            <span class="title">ScaleEdge</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/dashboard">
+            <span class="icon">
+              <i class="fa-solid fa-house"></i>
+            </span>
+            <span class="title">Home</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/usermangment">
+            <span class="icon">
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <span class="title">User Managment</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <span class="icon">
+              <i class="fa-solid fa-pencil"></i>
+            </span>
+            <span class="title">Lead Managment</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/face">
+            <span class="icon">
+              <i class="fa-solid fa-clipboard-user"></i>
+            </span>
+            <span class="title">Attendance</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/report">
+            <span class="icon">
+              <i class="fa-solid fa-clipboard-user"></i>
+            </span>
+            <span class="title">Report</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <span class="icon">
+              <i class="fa-solid fa-gear"></i>
+            </span>
+            <span class="title">Setting</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/logout">
+            <span class="icon">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </span>
+            <span class="title">Sign Out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+
+        <div class="search">
+          <label>
+            <input type="text" id="searchInput" placeholder="Search..." />
+            <i class="bx bx-search"></i>
+          </label>
+        </div>
+        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-bell" style="margin: 10px 2px;
+"></i>
+      </div>
+
+      <div class="details">
+        <div class="recentOrders">
+          <div class="cardHeader">
+            <h2>Recent Activity</h2>
+            <a href="/report" class="btn">View All</a>
+          </div>
+
+          <table id="userDataTable" class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Mark</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each rows}}
+              <tr>
+                <td scope="row">{{this.user_name}}</td>
+                <td>{{this.date_column}}</td>
+                <td>{{this.time_column}}</td>
+                <td>{{this.A_type}}</td>
+                <td>{{this.range_status}}</td>
+                <td>{{this.attendance_mark}}</td>
+              </tr>
+              {{/each}}
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="recentCustomers">
+
+          <img src="/profile/{{rows.[0].Imagepath}}" alt="" width="125px" class="customer" />
+          <h2 class="customer1">{{rows.[0].user_name}}</h2>
+          <h4 class="customer2">Designation</h4>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
+<script>
+        // add hovered class to selected list item
+        let list = document.querySelectorAll(".navigation li");
+
+        function activeLink() {
+            list.forEach((item) => {
+                item.classList.remove("hovered");
+            });
+            this.classList.add("hovered");
+        }
+
+        list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+        // Menu Toggle
+        let toggle = document.querySelector(".toggle");
+        let navigation = document.querySelector(".navigation");
+        let main = document.querySelector(".main");
+
+        toggle.onclick = function () {
+            navigation.classList.toggle("active");
+            main.classList.toggle("active");
+        };
+
+
+
+
+    </script>

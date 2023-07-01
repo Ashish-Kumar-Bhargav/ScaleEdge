@@ -64,13 +64,13 @@ $(document).ready(function () {
 
     let recognizedLabel = null;
 
-    function storeCheckinTime(label, latitude, longitude) {
+    function storeCheckinTime(label, latitude, longitude, range_status) {
       fetch('/storeCheckinTime', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ label: label, latitude: latitude, longitude: longitude })
+        body: JSON.stringify({ label: label, latitude: latitude, longitude: longitude, range_status: range_status })
       })
         .then((response) => response.json())
         .then((data) => {
@@ -82,13 +82,13 @@ $(document).ready(function () {
         });
     }
 
-    function storeCheckoutTime(label, latitude, longitude) {
+    function storeCheckoutTime(label, latitude, longitude, range_status) {
       fetch('/storeCheckoutTime', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ label: label, latitude: latitude, longitude: longitude })
+        body: JSON.stringify({ label: label, latitude: latitude, longitude: longitude, range_status: range_status })
       })
         .then((response) => response.json())
         .then((data) => {
@@ -100,6 +100,10 @@ $(document).ready(function () {
         });
     }
 
+    function calculateRange(latitude, longitude) {
+      return Math.abs(latitude - longitude);
+    }
+
     function handleCheckin() {
       if (recognizedLabel) {
         if (navigator.geolocation) {
@@ -107,10 +111,21 @@ $(document).ready(function () {
             function (position) {
               const latitude = position.coords.latitude;
               const longitude = position.coords.longitude;
-              storeCheckinTime(recognizedLabel, latitude, longitude);
+              const range = calculateRange(latitude, longitude);
+              let range_status;
 
-              alert('Punch In successful. Face match found: ' + recognizedLabel);
-              window.location.href = '/dashboard';
+              if (range <= 60.0000) {
+                range_status = 'ok';
+                storeCheckinTime(recognizedLabel, latitude, longitude, range_status);
+
+                alert('Punch In successful. Face match found: ' + recognizedLabel);
+                window.location.href = '/dashboard';
+              } else {
+                range_status = 'onfield';
+                storeCheckinTime(recognizedLabel, latitude, longitude, range_status);
+
+                alert('Punch In successful. Face match found: ' + recognizedLabel);
+                window.location.href = '/dashboard';              }
             },
             function (error) {
               console.error('Error getting geolocation:', error);
@@ -132,10 +147,21 @@ $(document).ready(function () {
             function (position) {
               const latitude = position.coords.latitude;
               const longitude = position.coords.longitude;
-              storeCheckoutTime(recognizedLabel, latitude, longitude);
+              const range = calculateRange(latitude, longitude);
+              let range_status;
 
-              alert('Punch Out successful. Face match found: ' + recognizedLabel);
-              window.location.href = '/dashboard';
+              if (range <= 60.0000) {
+                range_status = 'ok';
+                storeCheckoutTime(recognizedLabel, latitude, longitude, range_status);
+
+                alert('Punch Out successful. Face match found: ' + recognizedLabel);
+                window.location.href = '/dashboard';
+              } else {
+                range_status = 'onfield';
+                storeCheckoutTime(recognizedLabel, latitude, longitude, range_status);
+
+                alert('Punch Out successful. Face match found: ' + recognizedLabel);
+                window.location.href = '/dashboard';              }
             },
             function (error) {
               console.error('Error getting geolocation:', error);

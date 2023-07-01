@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Admin Dashboard</title>
+    <link rel="stylesheet" href="stylesheets/usermanagment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-s fa-spin"></i>
+                        </span>
+                        <span class="title">ScaleEdge</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/dashboard">
+                        <span class="icon">
+                            <i class="fa-solid fa-house"></i>
+                        </span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="//usermangment">
+                        <span class="icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <span class="title">User Managment</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-pencil"></i>
+                        </span>
+                        <span class="title">Lead Managment</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/face">
+                        <span class="icon">
+                            <i class="fa-solid fa-clipboard-user"></i>
+                        </span>
+                        <span class="title">Attendance</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/report">
+                        <span class="icon">
+                            <i class="fa-solid fa-clipboard-user"></i>
+                        </span>
+                        <span class="title">Report</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </span>
+                        <span class="title">Setting</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/logout">
+                        <span class="icon">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search-box">
+                    <label>
+                        <input type="text" id="searchInput" placeholder="Search...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <!-- <img src="assets/imgs/customer01.jpg" alt=""> -->
+                </div>
+            </div>
+
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Users</h2>
+                        <a href="/add" class="btn">Add User</a>
+                    </div>
+
+                    <table id="userDataTable" class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <!-- <th><input type="checkbox" id="selectAll"></th> -->
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Group</th>
+                                <th scope="col" class="text-end">Action </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <tbody>
+                            {{#each rows}}
+                            <tr>
+                                <!-- <td><input type="checkbox" class="checkbox"></td> -->
+                                <td scope="row">{{this.id}}</td>
+                                <td><a href="/details/{{this.user_name}}">{{this.user_name}}</a></td>
+                                <td>{{this.email}}</td>
+                                <td>{{this.mobile}}</td>
+                                <td>{{this.user_group}}</td>
+                                <td class="text-end">
+                                    <a href="/edit/{{this.id}}" type="button" class="btn btn-light btn-small"
+                                        style="text-decoration: none; color:black;">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
+                                    <a href="#" onclick="deleteUser('{{this.id}}')" type="button"
+                                        class="btn btn-light btn-small">
+                                        <i class="fa-solid fa-trash-alt red" style="color: red;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let list = document.querySelectorAll(".navigation li");
+
+        function activeLink() {
+            list.forEach((item) => {
+                item.classList.remove("hovered");
+            });
+            this.classList.add("hovered");
+        }
+
+        list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+        let toggle = document.querySelector(".toggle");
+        let navigation = document.querySelector(".navigation");
+        let main = document.querySelector(".main");
+
+        toggle.onclick = function () {
+            navigation.classList.toggle("active");
+            main.classList.toggle("active");
+        };
+
+        //serach
+        function deleteUser(userId) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this user!",
+                icon: "warning",
+                buttons: ["Cancel", "Delete"],
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = "/delete/" + userId;
+                }
+            });
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            const rows = document.querySelectorAll('#userDataTable tbody tr');
+            rows.forEach(row => {
+                const nameCell = row.querySelector('td:nth-child(3)');
+                const emailCell = row.querySelector('td:nth-child(4)');
+                const mobileCell = row.querySelector('td:nth-child(5)');
+                const userGroupCell = row.querySelector('td:nth-child(6)');
+
+                const name = nameCell.textContent.trim().toLowerCase();
+                const email = emailCell.textContent.trim().toLowerCase();
+                const mobile = mobileCell.textContent.trim().toLowerCase();
+                const userGroup = userGroupCell.textContent.trim().toLowerCase();
+
+                if (
+                    name.includes(searchTerm) ||
+                    email.includes(searchTerm) ||
+                    mobile.includes(searchTerm) ||
+                    userGroup.includes(searchTerm)
+                ) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+
+
+        const searchInput1 = document.getElementById('searchInput1');
+        searchInput1.addEventListener('input', function () {
+            const searchTerm = searchInput1.value.trim().toLowerCase();
+            const rows = document.querySelectorAll('#userDataTable tbody tr');
+            rows.forEach(row => {
+                const nameCell = row.querySelector('td:nth-child(3)');
+                const emailCell = row.querySelector('td:nth-child(4)');
+                const mobileCell = row.querySelector('td:nth-child(5)');
+                const userGroupCell = row.querySelector('td:nth-child(6)');
+
+                const name = nameCell.textContent.trim().toLowerCase();
+                const email = emailCell.textContent.trim().toLowerCase();
+                const mobile = mobileCell.textContent.trim().toLowerCase();
+                const userGroup = userGroupCell.textContent.trim().toLowerCase();
+
+                if (
+                    name.includes(searchTerm) ||
+                    email.includes(searchTerm) ||
+                    mobile.includes(searchTerm) ||
+                    userGroup.includes(searchTerm)
+                ) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+
+    </script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

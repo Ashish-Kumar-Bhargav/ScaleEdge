@@ -163,18 +163,18 @@ body {
   cursor: pointer;
 }
 
-.search {
+.search-box {
   position: relative;
   width: 400px;
   margin: 0 10px;
 }
 
-.search label {
+.search-box label {
   position: relative;
   width: 100%;
 }
 
-.search label input {
+.search-box label input {
   width: 100%;
   height: 40px;
   border-radius: 40px;
@@ -185,11 +185,11 @@ body {
   border: 1px solid var(--black2);
 }
 
-.search label i {
+.search-box label i {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 10px;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
 }
 
 .user {
@@ -263,10 +263,12 @@ body {
   position: relative;
   width: 100%;
   padding: 20px;
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
-  /* margin-top: 10px; */
+  margin-top: 10vh;
+  text-align: center;
+
 }
 
 .details .recentOrders {
@@ -294,15 +296,13 @@ body {
   background: var(--blue);
   text-decoration: none;
   color: var(--white);
-  border-radius: 6px;
+  /* border-radius: 6px; */
 }
 
 .details table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  text-align: center;
-
 }
 .details table thead td {
   font-weight: 600;
@@ -320,16 +320,18 @@ body {
 } */
 .details .recentOrders table tr td {
   padding: 10px;
+  color: black;
 }
-.details .recentOrders table tr td:last-child {
+
+/* .details .recentOrders table tr td:last-child {
   text-align: end;
 }
 .details .recentOrders table tr td:nth-child(2) {
   text-align: end;
-}
-.details .recentOrders table tr td:nth-child(3) {
+} */
+/* .details .recentOrders table tr td:nth-child(3) {
   text-align: center;
-}
+} */
 .status.delivered {
   padding: 2px 4px;
   background: #8de02c;
@@ -468,4 +470,8 @@ body {
     right: 0;
     left: initial;
   }
+}
+a{
+  text-decoration: none;
+  color: #287Bff;
 }
